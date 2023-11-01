@@ -6,8 +6,8 @@ import 'dart:math';
 
 import 'package:macro_proposal/auto_dispose.dart';
 import 'package:macro_proposal/data_class.dart';
-import 'package:macro_proposal/observable.dart';
 import 'package:macro_proposal/json_serializable.dart';
+import 'package:macro_proposal/observable.dart';
 
 void main() {
   var rand = Random();
@@ -16,18 +16,18 @@ void main() {
     'name': 'Roger',
     'username': 'roger1337'
   };
-  var roger = User.fromJson(rogerJson);
-  print(roger);
-  var joe = Manager.gen(
+  //var roger = User.fromJson(rogerJson);
+  //print(roger);
+  /*var joe = Manager.gen(
       age: rand.nextInt(100),
       name: 'Joe',
       username: 'joe1234',
       reports: [roger]);
-  print(joe);
+  print(joe);*/
 
-  var phoenix =
+  /*var phoenix =
       joe.copyWith(name: 'Phoenix', age: rand.nextInt(100), reports: [joe]);
-  print(phoenix);
+  print(phoenix);*/
 
   var observableUser = ObservableUser(age: 10, name: 'Georgio');
   observableUser
@@ -35,15 +35,15 @@ void main() {
     ..name = 'Greg';
 
   var state = MyState.gen(a: ADisposable(), b: BDisposable(), c: 'hello world');
-  state.dispose();
+  // state.dispose();
 
-  var father = Father.fromJson({
-    'age': roger.age + 25,
+  /*var father = Father.fromJson({
+    'age': 25,
     'name': 'Rogers Dad',
     'username': 'dadJokesAreCool123',
     'child': rogerJson,
   });
-  print(father);
+  print(father);*/
 }
 
 @DataClass()
@@ -54,10 +54,10 @@ class User {
   final String username;
 }
 
-@DataClass()
+/*@DataClass()
 class Manager extends User {
   final List<User> reports;
-}
+}*/
 
 class ObservableUser {
   @Observable()
