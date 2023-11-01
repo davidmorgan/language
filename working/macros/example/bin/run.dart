@@ -29,6 +29,7 @@ void main(List<String> args) async {
   var injectableUri = Uri.parse('package:macro_proposal/injectable.dart');
   var checksExtensionsUri =
       Uri.parse('package:macro_proposal/checks_extensions.dart');
+  var valueUri = Uri.parse('package:macro_proposal/value.dart');
   var bootstrapContent = bootstrapMacroIsolate({
     dataClassUri.toString(): {
       'AutoConstructor': [''],
@@ -57,6 +58,9 @@ void main(List<String> args) async {
     checksExtensionsUri.toString(): {
       'ChecksExtensions': [''],
       'ChecksExtension': [''],
+    },
+    valueUri.toString(): {
+      'Value': [''],
     },
   }, SerializationMode.byteData);
   bootstrapFile.writeAsStringSync(bootstrapContent);
@@ -88,6 +92,7 @@ void main(List<String> args) async {
     '--source=lib/injectable.dart',
     '--source=lib/json_serializable.dart',
     '--source=lib/observable.dart',
+    '--source=lib/value.dart',
     for (var source in await _allSources(feAnalyzerSharedRoot.path))
       '--source=$source',
     '--packages-file=.dart_tool/package_config.json',
@@ -128,6 +133,8 @@ void main(List<String> args) async {
     '$injectableUri;${bootstrapKernelFile.path}',
     '--precompiled-macro',
     '$checksExtensionsUri;${bootstrapKernelFile.path}',
+    '--precompiled-macro',
+    '$valueUri;${bootstrapKernelFile.path}',
     '--macro-serialization-mode=bytedata',
     '--input-linked',
     bootstrapKernelFile.path,

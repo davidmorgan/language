@@ -8,6 +8,7 @@ import 'package:macro_proposal/auto_dispose.dart';
 import 'package:macro_proposal/data_class.dart';
 import 'package:macro_proposal/json_serializable.dart';
 import 'package:macro_proposal/observable.dart';
+import 'package:macro_proposal/value.dart';
 
 void main() {
   var rand = Random();
@@ -44,6 +45,8 @@ void main() {
     'child': rogerJson,
   });
   print(father);*/
+
+  print(SimpleValue.gen(anInt: 3));
 }
 
 @DataClass()
@@ -109,4 +112,11 @@ class Father implements User {
   final String name;
   final String username;
   final User child;
+}
+
+@Value()
+class SimpleValue {
+  final int anInt;
+
+  String toString() => 'SimpleValue(anInt: $anInt)';
 }
